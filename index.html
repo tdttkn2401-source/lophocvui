@@ -1,0 +1,1942 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lớp Học Vui - Phân công, Ôn tập & Infographic</title>
+
+  <!-- Thư viện đọc PDF và DOCX ngay trên trình duyệt -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mammoth@1.9.1/mammoth.browser.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --bg: #f3f6fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --border: #d9e1f2;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --warning: #f59e0b;
+      --soft-blue: #eaf2ff;
+      --soft-green: #ecfdf5;
+      --soft-red: #fef2f2;
+      --soft-yellow: #fffbeb;
+      --soft-purple: #f5f3ff;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Inter, Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #e0f2fe 0%, #f8fafc 42%, #eef2ff 100%);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+
+    header {
+      padding: 28px 20px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 34px;
+      color: #0f172a;
+    }
+
+    header p {
+      margin: 8px auto 0;
+      max-width: 920px;
+      line-height: 1.6;
+    }
+
+    .main-slogan {
+      display: inline-block;
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 19px;
+      color: #be185d;
+      background: linear-gradient(135deg, #fff7ed, #fce7f3, #e0f2fe);
+      border: 1px solid rgba(244, 114, 182, 0.45);
+      box-shadow: 0 10px 26px rgba(244, 114, 182, 0.18);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.85);
+    }
+
+    .app {
+      width: min(1240px, calc(100% - 28px));
+      margin: 0 auto 40px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .tab-btn {
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--text);
+      padding: 12px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14.5px;
+      font-weight: 850;
+      line-height: 1.2;
+      transition: 0.2s;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+    }
+
+    .tab-btn.active,
+    .tab-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .panel {
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .grid,
+    .quiz-layout {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(217, 225, 242, 0.95);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .inner-card {
+      box-shadow: none;
+      background: #ffffff;
+    }
+
+    .card h2,
+    .card h3 {
+      margin: 0 0 12px;
+      color: #0f172a;
+    }
+
+    label {
+      display: block;
+      font-weight: 800;
+      margin: 12px 0 7px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 11px 12px;
+      font-size: 15px;
+      outline: none;
+      background: white;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    textarea {
+      min-height: 128px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      align-items: center;
+    }
+
+    button {
+      border: 0;
+      border-radius: 12px;
+      padding: 11px 16px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: inherit;
+      font-size: 14.5px;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+      text-align: center;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: 0.2s;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .secondary {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .secondary:hover {
+      background: #cbd5e1;
+    }
+
+    .danger {
+      background: var(--soft-red);
+      color: var(--danger);
+    }
+
+    .success {
+      background: var(--soft-green);
+      color: var(--success);
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .metric {
+      background: linear-gradient(135deg, #ffffff, #f8fbff);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .metric .num {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .metric .label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid #edf2f7;
+      padding: 11px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: #334155;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    tr:hover td {
+      background: #fbfdff;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--soft-blue);
+      color: #1d4ed8;
+      font-weight: 800;
+      font-size: 12px;
+      margin: 2px 4px 2px 0;
+      line-height: 1.35;
+    }
+
+    .task-pill {
+      background: #fff7ed;
+      color: #c2410c;
+    }
+
+    .student-pill {
+      background: #ecfdf5;
+      color: #15803d;
+    }
+
+    .warning-box {
+      display: none;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      color: #92400e;
+      padding: 12px;
+      border-radius: 14px;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .stats-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .full-row {
+      grid-column: 1 / -1;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 150px 1fr 40px;
+      gap: 10px;
+      align-items: center;
+      margin: 9px 0;
+      font-size: 14px;
+    }
+
+    .bar-track {
+      height: 12px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #60a5fa, #2563eb);
+      border-radius: 999px;
+      width: 0%;
+    }
+
+    .question-card {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      margin-bottom: 12px;
+      background: white;
+    }
+
+    .question-title {
+      font-weight: 900;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .option {
+      display: block;
+      padding: 9px 10px;
+      border-radius: 12px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      margin: 7px 0;
+      cursor: pointer;
+    }
+
+    .option.correct {
+      color: var(--danger);
+      font-weight: 900;
+      border-color: #fecaca;
+      background: #fff1f2;
+    }
+
+    .play-area {
+      border: 1px dashed #b6c5df;
+      background: #f8fbff;
+      border-radius: 20px;
+      padding: 18px;
+      min-height: 240px;
+    }
+
+    .big-question {
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .game-option {
+      width: 100%;
+      justify-content: flex-start;
+      text-align: left;
+      margin: 7px 0;
+      background: white;
+      border: 1px solid var(--border);
+      color: #0f172a;
+      font-size: 14.5px;
+      white-space: normal;
+    }
+
+    .game-option:hover {
+      background: #eff6ff;
+    }
+
+    .game-option.selected-correct {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+
+    .game-option.selected-wrong {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+    }
+
+    .game-option.show-answer {
+      color: var(--danger);
+      font-weight: 900;
+      border-color: #fca5a5;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 18px;
+    }
+
+
+
+
+    /* ======================= BANNER TRANG CHỦ SINH ĐỘNG ======================= */
+    .hero-header {
+      padding: 24px 14px 16px;
+      text-align: center;
+    }
+
+    .hero-shell {
+      position: relative;
+      width: min(1240px, 100%);
+      min-height: 210px;
+      margin: 0 auto;
+      padding: 30px 330px 24px;
+      border-radius: 32px;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      border-radius: inherit;
+      background:
+        radial-gradient(circle at 9% 28%, rgba(186, 230, 253, 0.72), transparent 31%),
+        radial-gradient(circle at 86% 25%, rgba(219, 234, 254, 0.78), transparent 32%),
+        linear-gradient(135deg, rgba(239, 246, 255, 0.92), rgba(255, 255, 255, 0.75), rgba(238, 242, 255, 0.92));
+      border: 1px solid rgba(191, 219, 254, 0.65);
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.06);
+    }
+
+    .hero-shell::after {
+      content: "";
+      position: absolute;
+      left: 4%;
+      right: 4%;
+      bottom: -46px;
+      height: 118px;
+      z-index: -1;
+      border-radius: 999px 999px 0 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.76), rgba(224,242,254,0.28));
+      filter: blur(0.2px);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      min-height: 138px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-header h1 {
+      margin: 0;
+      color: #0f172a;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.12;
+      letter-spacing: 0.02em;
+      text-shadow: 0 2px 0 rgba(255, 255, 255, 0.85);
+    }
+
+    .seed-icon {
+      display: inline-block;
+      margin-right: 6px;
+      transform: translateY(2px);
+      filter: drop-shadow(0 6px 10px rgba(34, 197, 94, 0.2));
+    }
+
+    .hero-header .main-slogan {
+      margin-top: 18px;
+      font-size: clamp(17px, 2vw, 21px);
+    }
+
+    .hero-illustration {
+      position: absolute;
+      bottom: 6px;
+      z-index: 1;
+      width: 320px;
+      max-width: 30%;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-left {
+      left: 16px;
+    }
+
+    .hero-right {
+      right: 12px;
+      width: 335px;
+    }
+
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .hero-left,
+    .hero-right {
+      animation: gentleFloat 5.5s ease-in-out infinite;
+    }
+
+    .hero-right {
+      animation-delay: 0.8s;
+    }
+
+    @media (max-width: 980px) {
+      .hero-shell {
+        min-height: 190px;
+        padding: 26px 170px 22px;
+      }
+
+      .hero-illustration {
+        width: 190px;
+        opacity: 0.72;
+      }
+
+      .hero-right {
+        width: 205px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero-shell {
+        min-height: auto;
+        padding: 24px 18px 22px;
+      }
+
+      .hero-illustration {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .btn-row button,
+      .tab-btn {
+        width: 100%;
+        white-space: normal;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      header,
+      .tabs,
+      .left-card,
+      .btn-row,
+      .no-print,
+      .quiz-layout .card:first-child {
+        display: none !important;
+      }
+
+      .app,
+      .grid,
+      .quiz-layout {
+        width: 100%;
+        display: block;
+      }
+
+      .card {
+        box-shadow: none;
+        border: none;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .grid,
+      .quiz-layout,
+      .stats-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 26px;
+      }
+
+      .row,
+      .summary-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .bar-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="hero-header">
+    <div class="hero-shell" aria-label="Banner Lớp Học Vui">
+      <svg class="hero-illustration hero-left" viewBox="0 0 360 210" role="img" aria-label="Sách vở, bút chì, máy bay giấy và robot AI dễ thương">
+        <defs>
+          <linearGradient id="leftBlue" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0" stop-color="#93c5fd" />
+            <stop offset="1" stop-color="#2563eb" />
+          </linearGradient>
+          <linearGradient id="leftPink" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0" stop-color="#fbcfe8" />
+            <stop offset="1" stop-color="#f472b6" />
+          </linearGradient>
+          <filter id="softShadowLeft" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.12" />
+          </filter>
+        </defs>
+
+        <path d="M20 151 C47 124 75 138 100 121 C130 101 155 111 172 140 C198 121 238 120 260 147 C289 144 325 153 342 178 L28 178 C18 170 15 160 20 151Z" fill="#dbeafe" opacity="0.62" />
+        <circle cx="42" cy="48" r="7" fill="#a5b4fc" opacity="0.75" />
+        <path d="M297 58 l8 18 19 2 -14 12 4 18 -16 -10 -17 9 5 -18 -13 -13 19-1Z" fill="#f9a8d4" opacity="0.8" />
+        <path d="M74 105 l7 15 17 2 -13 10 4 16 -14 -8 -15 8 4-16 -12-10 16-2Z" fill="#fde68a" />
+        <path d="M244 82 C230 70 218 76 218 91 C218 108 244 115 244 129 C244 115 270 108 270 91 C270 76 258 70 244 82Z" fill="none" stroke="#a78bfa" stroke-width="5" stroke-linecap="round" opacity="0.7" />
+
+        <path d="M124 42 L268 28 L186 105 Z" fill="#7dd3fc" opacity="0.85" />
+        <path d="M124 42 L186 105 L178 67 Z" fill="#38bdf8" opacity="0.95" />
+        <path d="M268 28 L178 67 L204 80 Z" fill="#60a5fa" opacity="0.92" />
+        <path d="M110 76 C91 86 93 104 112 110 C137 118 141 87 167 101" fill="none" stroke="#7dd3fc" stroke-width="4" stroke-linecap="round" stroke-dasharray="7 9" opacity="0.8" />
+
+        <g filter="url(#softShadowLeft)">
+          <rect x="44" y="151" width="126" height="22" rx="10" fill="#f472b6" />
+          <rect x="54" y="131" width="132" height="24" rx="10" fill="#60a5fa" />
+          <rect x="35" y="170" width="150" height="23" rx="10" fill="#fb7185" />
+          <rect x="58" y="169" width="115" height="5" rx="2" fill="#fecdd3" opacity="0.8" />
+          <rect x="70" y="132" width="105" height="5" rx="2" fill="#dbeafe" opacity="0.75" />
+        </g>
+
+        <g filter="url(#softShadowLeft)">
+          <path d="M175 129 C205 116 237 119 263 140 L263 184 C238 168 207 166 175 182Z" fill="#fef3c7" />
+          <path d="M174 129 C146 116 115 119 89 140 L89 184 C116 169 147 166 175 182Z" fill="#fff7ed" />
+          <path d="M176 129 L176 183" stroke="#f59e0b" stroke-width="3" opacity="0.55" />
+          <path d="M101 146 C122 137 145 136 164 145" stroke="#fed7aa" stroke-width="3" fill="none" />
+          <path d="M190 145 C211 137 235 137 253 147" stroke="#fed7aa" stroke-width="3" fill="none" />
+          <path d="M206 179 L216 198 L226 178" fill="#fbbf24" />
+        </g>
+
+        <g filter="url(#softShadowLeft)">
+          <rect x="83" y="82" width="58" height="63" rx="15" fill="#fde68a" />
+          <rect x="92" y="78" width="9" height="57" rx="4" transform="rotate(-10 92 78)" fill="#f97316" />
+          <rect x="111" y="70" width="9" height="65" rx="4" fill="#818cf8" />
+          <rect x="128" y="77" width="9" height="60" rx="4" transform="rotate(8 128 77)" fill="#38bdf8" />
+          <path d="M88 87 H139" stroke="#f59e0b" stroke-width="4" opacity="0.38" />
+        </g>
+        <g filter="url(#softShadowLeft)">
+          <rect x="236" y="102" width="82" height="54" rx="18" fill="#e0f2fe" stroke="#60a5fa" stroke-width="3" />
+          <rect x="247" y="112" width="60" height="34" rx="11" fill="#ffffff" />
+          <circle cx="267" cy="128" r="5" fill="#2563eb" />
+          <circle cx="288" cy="128" r="5" fill="#2563eb" />
+          <path d="M266 140 C272 146 283 146 289 140" fill="none" stroke="#f472b6" stroke-width="4" stroke-linecap="round" />
+          <path d="M277 101 L277 91" stroke="#2563eb" stroke-width="4" stroke-linecap="round" />
+          <circle cx="277" cy="87" r="6" fill="#fde68a" />
+          <rect x="259" y="154" width="37" height="15" rx="7" fill="#93c5fd" />
+          <text x="277.5" y="165" text-anchor="middle" font-size="11" font-weight="900" fill="#1e3a8a">AI</text>
+        </g>
+        <circle cx="321" cy="118" r="7" fill="#c4b5fd" opacity="0.9" />
+        <circle cx="337" cy="133" r="5" fill="#86efac" opacity="0.95" />
+        <path d="M318 119 L337 133" stroke="#93c5fd" stroke-width="3" stroke-dasharray="4 5" stroke-linecap="round" opacity="0.9" />
+        <path d="M315 95 l6 12 13 1 -10 8 3 12 -12 -7 -11 7 3 -12 -9 -8 12-1Z" fill="#fef08a" opacity="0.85" />
+      </svg>
+
+      <div class="hero-content">
+        <h1><span class="seed-icon" aria-hidden="true">🌱</span> Lớp Học Vui TH&amp;THCS Lạc An</h1>
+        <p class="main-slogan">“Việc nhỏ xinh xinh – Lớp đẹp lung linh!”</p>
+      </div>
+
+      <svg class="hero-illustration hero-right" viewBox="0 0 380 220" role="img" aria-label="Cặp sách, học sinh, biểu tượng AI, bóng đèn và mũ tốt nghiệp">
+        <defs>
+          <linearGradient id="rightBlue" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0" stop-color="#93c5fd" />
+            <stop offset="1" stop-color="#2563eb" />
+          </linearGradient>
+          <linearGradient id="rightYellow" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0" stop-color="#fde68a" />
+            <stop offset="1" stop-color="#f59e0b" />
+          </linearGradient>
+          <filter id="softShadowRight" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.13" />
+          </filter>
+        </defs>
+
+        <path d="M29 139 C50 115 83 121 102 138 C124 111 167 109 190 137 C221 124 254 132 267 158 L33 158 C22 153 21 145 29 139Z" fill="#dbeafe" opacity="0.7" />
+        <circle cx="309" cy="55" r="5" fill="#f0abfc" />
+        <path d="M326 98 l6 13 15 1 -11 9 3 14 -13 -7 -13 7 3-14 -10-9 14-1Z" fill="#a7f3d0" opacity="0.85" />
+
+        <g filter="url(#softShadowRight)">
+          <circle cx="117" cy="57" r="27" fill="url(#rightYellow)" />
+          <path d="M104 58 C105 44 128 44 130 58 C131 68 121 70 121 82 L113 82 C113 70 103 68 104 58Z" fill="#fef3c7" opacity="0.8" />
+          <rect x="111" y="82" width="15" height="14" rx="4" fill="#64748b" />
+          <path d="M85 48 l-17 -8 M95 31 l-8 -17 M122 25 l5 -18 M143 42 l17 -9 M148 64 l19 2" stroke="#fbbf24" stroke-width="5" stroke-linecap="round" opacity="0.65" />
+        </g>
+
+        <g filter="url(#softShadowRight)">
+          <path d="M252 54 L341 59 L304 81 L215 76Z" fill="#334155" />
+          <path d="M304 81 L304 116" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" />
+          <circle cx="304" cy="118" r="5" fill="#fbbf24" />
+          <path d="M244 78 C267 95 302 95 326 82 L326 96 C303 112 267 112 244 95Z" fill="#1e3a8a" />
+        </g>
+
+        <g filter="url(#softShadowRight)">
+          <path d="M182 101 C184 72 233 72 235 101 L235 183 L179 183 Z" fill="#1d4ed8" />
+          <path d="M154 109 C155 81 205 77 212 111 L212 190 L150 190 Z" fill="url(#rightBlue)" />
+          <rect x="169" y="134" width="51" height="36" rx="9" fill="#fde68a" />
+          <circle cx="189" cy="119" r="7" fill="#f9a8d4" />
+          <path d="M169 95 C177 72 203 73 211 96" fill="none" stroke="#1e40af" stroke-width="10" stroke-linecap="round" />
+        </g>
+
+        <g filter="url(#softShadowRight)">
+          <rect x="246" y="121" width="102" height="74" rx="12" fill="#fff7ed" transform="rotate(3 246 121)" />
+          <path d="M267 151 C258 140 248 146 249 158 C250 173 272 174 282 188 C291 174 313 173 314 158 C315 146 305 140 296 151 C290 142 274 142 267 151Z" fill="none" stroke="#f9a8d4" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+          <rect x="335" y="154" width="12" height="58" rx="4" fill="#f59e0b" transform="rotate(18 335 154)" />
+          <path d="M336 152 L350 158 L340 166 Z" fill="#fde68a" />
+        </g>
+
+        <g filter="url(#softShadowRight)">
+          <rect x="125" y="174" width="74" height="18" rx="7" fill="#a78bfa" />
+          <rect x="139" y="156" width="76" height="19" rx="7" fill="#fde68a" />
+          <path d="M119 132 C110 106 149 96 159 129 L159 158 L121 158 Z" fill="#86efac" />
+          <rect x="112" y="151" width="56" height="36" rx="10" fill="#f9a8d4" />
+        </g>
+        <g filter="url(#softShadowRight)">
+          <circle cx="78" cy="132" r="18" fill="#fde68a" />
+          <path d="M62 154 C69 145 87 145 94 154 L99 175 H57 Z" fill="#f9a8d4" />
+          <path d="M69 130 C70 118 88 118 89 130" fill="none" stroke="#92400e" stroke-width="4" stroke-linecap="round" />
+          <circle cx="92" cy="142" r="16" fill="#bfdbfe" />
+          <path d="M78 160 C84 152 99 152 106 160 L111 178 H73 Z" fill="#86efac" />
+          <path d="M82 141 C84 131 101 130 103 141" fill="none" stroke="#1e3a8a" stroke-width="4" stroke-linecap="round" />
+        </g>
+
+        <g filter="url(#softShadowRight)">
+          <rect x="282" y="22" width="54" height="28" rx="12" fill="#e0e7ff" />
+          <text x="309" y="40" text-anchor="middle" font-size="14" font-weight="900" fill="#4338ca">AI</text>
+          <circle cx="348" cy="33" r="8" fill="#f9a8d4" opacity="0.9" />
+          <path d="M347 18 L347 11 M359 24 L365 19 M359 41 L366 45 M336 24 L330 19" stroke="#60a5fa" stroke-width="3" stroke-linecap="round" opacity="0.85" />
+        </g>
+      </svg>
+    </div>
+  </header>
+
+  <main class="app">
+    <div class="tabs no-print">
+      <button class="tab-btn active" onclick="switchTab('assignment', this)">📋 Phân công nhiệm vụ</button>
+      <button class="tab-btn" onclick="switchTab('quiz', this)">🎮 Trò chơi ôn tập</button>
+
+    </div>
+
+    <!-- ======================= PHÂN CÔNG NHIỆM VỤ ======================= -->
+    <section id="assignment" class="panel active">
+      <div class="grid">
+        <div class="card left-card">
+          <h2>Thiết lập phân công</h2>
+
+          <label for="groupName">Tên tổ / nhóm</label>
+          <input id="groupName" value="Tổ 1" />
+
+          <label for="studentList">Danh sách học sinh</label>
+          <textarea id="studentList">Nguyễn Văn An
+Trần Thị Bình
+Trần Bảo Thy
+Lê Minh Châu
+Phạm Quốc Dũng
+Hoàng Lan Anh
+Võ Minh Khôi
+Đỗ Gia Hân
+Bùi Nhật Nam</textarea>
+          <div class="note">Mỗi học sinh nhập trên một dòng.</div>
+
+          <label for="taskList">Danh sách công việc</label>
+          <textarea id="taskList">Tưới cây
+Quét rác
+Lau sàn lớp
+Lau bảng
+Đổ rác</textarea>
+          <div class="note">Mỗi công việc nhập trên một dòng. Khi bấm “Tạo lịch công bằng”, mỗi ca Sáng/Chiều sẽ có đủ tất cả công việc trong danh sách này.</div>
+
+          <div class="row">
+            <div>
+              <label for="studentsPerShift">Số học sinh / mỗi công việc</label>
+              <input id="studentsPerShift" type="number" min="1" max="5" value="1" />
+            </div>
+            <div>
+              <label for="weekLabel">Tuần</label>
+              <input id="weekLabel" value="Tuần này" />
+            </div>
+          </div>
+
+          <label for="absentList">Học sinh vắng / không phân công</label>
+          <textarea id="absentList" placeholder="Ví dụ:
+Nguyễn Văn An"></textarea>
+          <div class="note">Nhập mỗi học sinh trên một dòng. Các em có tên trong ô này sẽ được loại khỏi toàn bộ lịch phân công, không phân công bất kỳ công việc nào. App không phân biệt chữ hoa/thường, dấu tiếng Việt và khoảng trắng thừa.</div>
+
+          <div class="btn-row">
+            <button class="primary" onclick="generateAssignment()">Tạo lịch công bằng</button>
+            <button class="secondary" onclick="loadDemoAssignment()">Dữ liệu mẫu</button>
+            <button class="danger" onclick="clearAssignment()">Xóa kết quả</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div id="assignmentWarning" class="warning-box"></div>
+          <h2 id="assignmentTitle">Lịch phân công</h2>
+
+          <div class="summary-cards">
+            <div class="metric">
+              <div class="num" id="metricStudents">0</div>
+              <div class="label">Học sinh được xếp</div>
+            </div>
+            <div class="metric">
+              <div class="num" id="metricShifts">10</div>
+              <div class="label">Ca trong tuần</div>
+            </div>
+            <div class="metric">
+              <div class="num" id="metricTasks">0</div>
+              <div class="label">Loại công việc</div>
+            </div>
+            <div class="metric">
+              <div class="num" id="metricFairness">-</div>
+              <div class="label">Chênh lệch số lần</div>
+            </div>
+          </div>
+
+          <div class="btn-row no-print">
+            <button class="secondary" onclick="window.print()">In / Lưu PDF</button>
+            <button class="success" onclick="exportAssignmentCSV()">Xuất CSV</button>
+            <button class="secondary" onclick="copyAssignmentText()">Copy lịch</button>
+          </div>
+
+          <div style="overflow-x:auto; margin-top: 14px;">
+            <table id="assignmentTable">
+              <thead>
+                <tr>
+                  <th>Ngày</th>
+                  <th>Buổi</th>
+                  <th>Công việc</th>
+                  <th>Học sinh phụ trách</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="4" style="text-align:center;color:#667085;padding:26px;">Chưa có lịch. Hãy bấm “Tạo lịch công bằng”.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="stats-wrap">
+            <div class="card inner-card">
+              <h3>Thống kê số lần theo học sinh</h3>
+              <div id="studentStats"></div>
+            </div>
+            <div class="card inner-card">
+              <h3>Thống kê theo công việc</h3>
+              <div id="taskStats"></div>
+            </div>
+            <div class="card inner-card full-row">
+              <h3>Chi tiết công việc theo từng học sinh</h3>
+              <div class="note" style="margin-bottom:10px;">
+                Bảng này giúp giáo viên biết từng em đã được phân công việc gì, vào buổi nào và ngày nào.
+              </div>
+              <div id="studentDetailStats"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= TRÒ CHƠI ÔN TẬP ======================= -->
+    <section id="quiz" class="panel">
+      <div class="quiz-layout">
+        <div class="card">
+          <h2>Tạo câu hỏi ôn tập bằng Gemini</h2>
+          <p class="note">
+            <b>Lưu ý bảo mật:</b> bản này cho phép nhập Gemini API key trực tiếp trên trình duyệt để chạy thử nhanh.
+            Khi đưa app lên web công khai, nên chuyển API key sang backend/serverless để tránh lộ key.
+          </p>
+
+          <label for="geminiApiKey">Gemini API key</label>
+          <input id="geminiApiKey" class="gemini-api-key" type="password" placeholder="Dán API key Gemini vào đây" autocomplete="off" oninput="syncGeminiKeys(this)" />
+
+          <div class="row">
+            <div>
+              <label for="geminiModel">Model Gemini</label>
+              <select id="geminiModel">
+                <option value="gemini-2.5-flash">gemini-2.5-flash</option>
+                <option value="gemini-2.0-flash">gemini-2.0-flash</option>
+                <option value="gemini-1.5-flash">gemini-1.5-flash</option>
+              </select>
+            </div>
+            <div>
+              <label for="mcqCount">Số câu A/B/C/D</label>
+              <input id="mcqCount" type="number" min="0" max="30" value="5" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="tfCount">Số câu Đúng/Sai</label>
+              <input id="tfCount" type="number" min="0" max="30" value="5" />
+            </div>
+            <div>
+              <label for="difficultyLevel">Mức độ</label>
+              <select id="difficultyLevel">
+                <option>Nhận biết</option>
+                <option>Thông hiểu</option>
+                <option>Vận dụng</option>
+                <option>Trộn mức độ</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="learningFile">Upload tài liệu Word/PDF/TXT</label>
+          <input id="learningFile" type="file" accept=".pdf,.docx,.txt" onchange="handleLearningFileUpload(event)" />
+          <div class="note">Hỗ trợ tốt nhất: PDF, DOCX, TXT. File DOC cũ nên đổi sang DOCX trước khi dùng.</div>
+
+          <label for="fileText">Nội dung tài liệu đã đọc</label>
+          <textarea id="fileText" style="min-height: 170px;" placeholder="Sau khi upload file, nội dung đọc được sẽ hiện ở đây. Bạn cũng có thể dán trực tiếp nội dung bài học vào ô này."></textarea>
+
+          <div class="btn-row">
+            <button class="primary" onclick="generateQuizWithGemini()">AI tạo câu hỏi</button>
+            <button class="secondary" onclick="loadDemoQuiz()">Dữ liệu mẫu</button>
+            <button class="danger" onclick="resetQuiz()">Xóa</button>
+          </div>
+          <div id="aiStatus" class="note" style="font-weight:700;"></div>
+
+          <hr style="border:none;border-top:1px solid #e2e8f0;margin:18px 0;" />
+
+          <h3>Hoặc nhập câu hỏi thủ công</h3>
+          <label for="quizInput">Nhập câu hỏi theo mẫu</label>
+          <textarea id="quizInput" style="min-height: 180px;">MCQ|Thiết bị nào dùng để nhập dữ liệu vào máy tính?|Màn hình|Máy in|Bàn phím|Loa|C
+TF|Internet là mạng máy tính toàn cầu.|Đúng</textarea>
+          <div class="note">
+            Mẫu trắc nghiệm: MCQ|Câu hỏi|A|B|C|D|Đáp án đúng<br />
+            Mẫu đúng/sai: TF|Câu hỏi|Đúng hoặc Sai
+          </div>
+          <div class="btn-row">
+            <button class="secondary" onclick="parseQuiz()">Tạo câu hỏi từ mẫu nhập tay</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Bộ câu hỏi & trò chơi</h2>
+          <div class="summary-cards">
+            <div class="metric">
+              <div class="num" id="quizCount">0</div>
+              <div class="label">Tổng câu hỏi</div>
+            </div>
+            <div class="metric">
+              <div class="num" id="quizScore">0</div>
+              <div class="label">Điểm trò chơi</div>
+            </div>
+            <div class="metric">
+              <div class="num" id="quizCurrent">0</div>
+              <div class="label">Câu hiện tại</div>
+            </div>
+            <div class="metric">
+              <div class="num" id="quizMode">-</div>
+              <div class="label">Dạng câu</div>
+            </div>
+          </div>
+
+          <div class="btn-row no-print">
+            <button class="primary" onclick="startGame()">Bắt đầu chơi</button>
+            <button class="secondary" onclick="showTeacherAnswers()">Hiện đáp án giáo viên</button>
+            <button class="secondary" onclick="window.print()">In câu hỏi / Lưu PDF</button>
+          </div>
+
+          <div class="play-area" id="gameArea">
+            <div style="text-align:center;color:#667085;padding:42px 10px;">
+              Chưa có trò chơi. Hãy tạo bộ câu hỏi rồi bấm “Bắt đầu chơi”.
+            </div>
+          </div>
+
+          <div id="questionListSection" class="question-list-section">
+            <h3 style="margin-top:18px;">Danh sách câu hỏi</h3>
+            <div id="questionList"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class=”footer-note”>
+      Gợi ý: lưu file này thành <b>index.html</b>, sau đó mở bằng Chrome/Edge là chạy được.
+    </div>
+  </main>
+
+  <script>
+    if (window.pdfjsLib) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+
+    const days = ["Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu"];
+    const sessions = ["Sáng", "Chiều"];
+
+    let currentAssignments = [];
+    let currentExcludedStudents = [];
+    let currentQuestions = [];
+    let uploadedLearningText = "";
+    let gameIndex = 0;
+    let gameScore = 0;
+    let answered = false;
+
+    function switchTab(tabId, btnEl) {
+      document.querySelectorAll(".panel").forEach(panel => panel.classList.remove("active"));
+      document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+      document.getElementById(tabId).classList.add("active");
+      if (btnEl) btnEl.classList.add("active");
+    }
+
+    function escapeHtml(text) {
+      return String(text ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function getLines(id) {
+      return document.getElementById(id).value
+        .split("\n")
+        .map(x => x.trim())
+        .filter(Boolean);
+    }
+
+    function normalizeName(name) {
+      return String(name ?? "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/đ/g, "d")
+        .replace(/Đ/g, "d")
+        .replace(/^\s*\d+[.)-]?\s*/g, "")
+        .replace(/[;,:|]+/g, " ")
+        .replace(/\s+/g, " ")
+        .trim()
+        .toLowerCase();
+    }
+
+    function rotateArray(arr, shift) {
+      if (!arr.length) return arr;
+      const n = shift % arr.length;
+      return arr.slice(n).concat(arr.slice(0, n));
+    }
+
+    // ======================= PHÂN CÔNG =======================
+    function generateAssignment() {
+      const groupName = document.getElementById("groupName").value.trim() || "Tổ";
+      const weekLabel = document.getElementById("weekLabel").value.trim() || "Tuần này";
+      const allStudents = getLines("studentList");
+      const tasks = getLines("taskList");
+      const absentLines = getLines("absentList");
+      const absentSet = new Set(absentLines.map(normalizeName).filter(Boolean));
+      const excludedStudents = allStudents.filter(s => absentSet.has(normalizeName(s)));
+      const students = allStudents.filter(s => !absentSet.has(normalizeName(s)));
+      const absentNotFound = absentLines.filter(line => {
+        const normalizedLine = normalizeName(line);
+        return normalizedLine && !allStudents.some(student => normalizeName(student) === normalizedLine);
+      });
+      const studentsPerTask = Math.max(1, Number(document.getElementById("studentsPerShift").value || 1));
+      const warning = document.getElementById("assignmentWarning");
+      const noticeMessages = [];
+
+      currentExcludedStudents = excludedStudents;
+      warning.style.display = "none";
+      warning.textContent = "";
+
+      if (allStudents.length === 0) {
+        showWarning("Bạn cần nhập ít nhất 1 học sinh trong danh sách học sinh.");
+        return;
+      }
+
+      if (students.length === 0) {
+        const excludedText = excludedStudents.length ? ` Các em đang bị loại: ${excludedStudents.join(", ")}.` : "";
+        showWarning("Tất cả học sinh đang nằm trong danh sách vắng / không phân công nên không còn học sinh để xếp lịch." + excludedText);
+        return;
+      }
+
+      if (tasks.length === 0) {
+        showWarning("Bạn cần nhập ít nhất 1 công việc.");
+        return;
+      }
+
+      if (excludedStudents.length > 0) {
+        noticeMessages.push(`Đã loại khỏi lịch ${excludedStudents.length} học sinh vắng / không phân công: ${excludedStudents.join(", ")}.`);
+      }
+
+      if (absentNotFound.length > 0) {
+        noticeMessages.push(`Lưu ý: ${absentNotFound.length} tên trong ô vắng chưa trùng với danh sách học sinh: ${absentNotFound.join(", ")}.`);
+      }
+
+      if (students.length < studentsPerTask) {
+        noticeMessages.push("Số học sinh / mỗi công việc đang lớn hơn số học sinh có thể phân công. App sẽ tự giảm về số học sinh hiện có.");
+      }
+
+      const actualStudentsPerTask = Math.min(studentsPerTask, students.length);
+      const counts = Object.fromEntries(students.map(s => [s, 0]));
+      const taskCounts = Object.fromEntries(tasks.map(t => [t, 0]));
+      const studentTaskCounts = Object.fromEntries(
+        students.map(s => [s, Object.fromEntries(tasks.map(t => [t, 0]))])
+      );
+      const lastAssignedDay = Object.fromEntries(students.map(s => [s, null]));
+      const rotatedStudents = rotateArray(students, Math.floor(Math.random() * students.length));
+      const assignments = [];
+
+      for (const day of days) {
+        for (const session of sessions) {
+          const shiftAssignees = [];
+
+          tasks.forEach(task => {
+            const selected = [];
+
+            for (let pick = 0; pick < actualStudentsPerTask; pick++) {
+              let candidates = rotatedStudents
+                .filter(s => !selected.includes(s))
+                .filter(s => !absentSet.has(normalizeName(s)));
+
+              // Ưu tiên không lặp học sinh trong cùng một ca. Nếu sĩ số ít hơn số việc thì mới cho phép lặp.
+              const unusedInThisShift = candidates.filter(s => !shiftAssignees.includes(s));
+              if (unusedInThisShift.length > 0) {
+                candidates = unusedInThisShift;
+              }
+
+              candidates.sort((a, b) => {
+                // Ưu tiên em có tổng số lần phân công ít hơn.
+                const countDiff = counts[a] - counts[b];
+                if (countDiff !== 0) return countDiff;
+
+                // Ưu tiên em đã làm công việc này ít hơn để xoay vòng loại việc công bằng.
+                const taskDiff = studentTaskCounts[a][task] - studentTaskCounts[b][task];
+                if (taskDiff !== 0) return taskDiff;
+
+                // Hạn chế một em bị xếp quá nhiều trong cùng một ngày nếu còn lựa chọn khác.
+                const sameDayA = lastAssignedDay[a] === day ? 1 : 0;
+                const sameDayB = lastAssignedDay[b] === day ? 1 : 0;
+                if (sameDayA !== sameDayB) return sameDayA - sameDayB;
+
+                return rotatedStudents.indexOf(a) - rotatedStudents.indexOf(b);
+              });
+
+              const chosen = candidates[0];
+              if (chosen) {
+                selected.push(chosen);
+                shiftAssignees.push(chosen);
+                counts[chosen] += 1;
+                taskCounts[task] += 1;
+                studentTaskCounts[chosen][task] += 1;
+                lastAssignedDay[chosen] = day;
+              }
+            }
+
+            assignments.push({ day, session, task, students: selected });
+          });
+        }
+      }
+
+      currentAssignments = assignments;
+      document.getElementById("assignmentTitle").textContent = `Lịch phân công - ${groupName} - ${weekLabel}`;
+      renderAssignment(assignments, counts, taskCounts, students.length, tasks.length);
+
+      if (noticeMessages.length > 0) {
+        showWarning(noticeMessages.join(" "));
+      }
+    }
+
+    function showWarning(message) {
+      const warning = document.getElementById("assignmentWarning");
+      warning.style.display = "block";
+      warning.textContent = message;
+    }
+
+    function renderAssignment(assignments, counts, taskCounts, studentCount, taskCount) {
+      const tbody = document.querySelector("#assignmentTable tbody");
+      tbody.innerHTML = assignments.map(item => `
+        <tr>
+          <td><b>${escapeHtml(item.day)}</b></td>
+          <td>${escapeHtml(item.session)}</td>
+          <td><span class="tag task-pill">${escapeHtml(item.task)}</span></td>
+          <td>${item.students.map(s => `<span class="tag student-pill">${escapeHtml(s)}</span>`).join("")}</td>
+        </tr>
+      `).join("");
+
+      const values = Object.values(counts);
+      const max = Math.max(...values);
+      const min = Math.min(...values);
+      const diff = max - min;
+      const totalShifts = days.length * sessions.length;
+
+      document.getElementById("metricStudents").textContent = studentCount;
+      document.getElementById("metricShifts").textContent = totalShifts;
+      document.getElementById("metricTasks").textContent = taskCount;
+      document.getElementById("metricFairness").textContent = diff;
+
+      renderBars("studentStats", counts);
+      renderBars("taskStats", taskCounts);
+      renderStudentDetailStats(assignments, counts);
+    }
+
+    function renderBars(containerId, data) {
+      const container = document.getElementById(containerId);
+      const entries = Object.entries(data);
+      if (!entries.length) {
+        container.innerHTML = '<p class="note">Chưa có dữ liệu.</p>';
+        return;
+      }
+
+      const max = Math.max(...entries.map(([_, value]) => value), 1);
+      container.innerHTML = entries.map(([name, value]) => {
+        const percent = Math.round((value / max) * 100);
+        return `
+          <div class="bar-row">
+            <div title="${escapeHtml(name)}"><b>${escapeHtml(name)}</b></div>
+            <div class="bar-track"><div class="bar-fill" style="width:${percent}%"></div></div>
+            <div><b>${value}</b></div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderStudentDetailStats(assignments, counts) {
+      const container = document.getElementById("studentDetailStats");
+      const studentNames = Object.keys(counts);
+
+      if (!studentNames.length) {
+        container.innerHTML = '<p class="note">Chưa có dữ liệu chi tiết.</p>';
+        return;
+      }
+
+      const detailMap = Object.fromEntries(studentNames.map(name => [name, []]));
+
+      assignments.forEach(item => {
+        item.students.forEach(student => {
+          if (!detailMap[student]) detailMap[student] = [];
+          detailMap[student].push({
+            task: item.task,
+            session: item.session,
+            day: item.day
+          });
+        });
+      });
+
+      container.innerHTML = `
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Học sinh</th>
+                <th>Số lần</th>
+                <th>Chi tiết công việc được phân công</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${studentNames.map(student => {
+                const details = detailMap[student] || [];
+                const detailText = details.length
+                  ? details.map(d => `<span class="tag task-pill">${escapeHtml(d.task)} - ${escapeHtml(d.session)} - ${escapeHtml(d.day)}</span>`).join("")
+                  : '<span class="note">Chưa được phân công</span>';
+
+                return `
+                  <tr>
+                    <td><b>${escapeHtml(student)}</b></td>
+                    <td><b>${counts[student]}</b></td>
+                    <td>${detailText}</td>
+                  </tr>
+                `;
+              }).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function clearAssignment() {
+      currentAssignments = [];
+      currentExcludedStudents = [];
+      document.querySelector("#assignmentTable tbody").innerHTML =
+        '<tr><td colspan="4" style="text-align:center;color:#667085;padding:26px;">Chưa có lịch. Hãy bấm “Tạo lịch công bằng”.</td></tr>';
+      document.getElementById("studentStats").innerHTML = "";
+      document.getElementById("taskStats").innerHTML = "";
+      document.getElementById("studentDetailStats").innerHTML = "";
+      document.getElementById("metricStudents").textContent = "0";
+      document.getElementById("metricShifts").textContent = "10";
+      document.getElementById("metricTasks").textContent = "0";
+      document.getElementById("metricFairness").textContent = "-";
+    }
+
+    function loadDemoAssignment() {
+      document.getElementById("groupName").value = "Tổ 1";
+      document.getElementById("studentList").value =
+        "Nguyễn Văn An\nTrần Thị Bình\nTrần Bảo Thy\nLê Minh Châu\nPhạm Quốc Dũng\nHoàng Lan Anh\nVõ Minh Khôi\nĐỗ Gia Hân\nBùi Nhật Nam";
+      document.getElementById("taskList").value =
+        "Tưới cây\nQuét rác\nLau sàn lớp\nLau bảng\nĐổ rác";
+      document.getElementById("studentsPerShift").value = 1;
+      document.getElementById("weekLabel").value = "Tuần này";
+      document.getElementById("absentList").value = "";
+    }
+
+    function assignmentToText() {
+      if (!currentAssignments.length) return "";
+      const title = document.getElementById("assignmentTitle").textContent;
+      const lines = [title, ""];
+      if (currentExcludedStudents.length) {
+        lines.push(`Học sinh vắng / không phân công: ${currentExcludedStudents.join(", ")}`, "");
+      }
+
+      currentAssignments.forEach(item => {
+        lines.push(`${item.day} - ${item.session}: ${item.task} - ${item.students.join(", ")}`);
+      });
+
+      const studentDetails = {};
+      currentAssignments.forEach(item => {
+        item.students.forEach(student => {
+          if (!studentDetails[student]) studentDetails[student] = [];
+          studentDetails[student].push(`${item.task} - ${item.session} - ${item.day}`);
+        });
+      });
+
+      lines.push("", "THỐNG KÊ CHI TIẾT THEO HỌC SINH:");
+      Object.entries(studentDetails).forEach(([student, details]) => {
+        lines.push(`${student}: ${details.join(" | ")}`);
+      });
+
+      return lines.join("\n");
+    }
+
+    function copyAssignmentText() {
+      const text = assignmentToText();
+      if (!text) {
+        alert("Chưa có lịch để copy.");
+        return;
+      }
+
+      navigator.clipboard.writeText(text)
+        .then(() => alert("Đã copy lịch phân công."))
+        .catch(() => alert("Không copy được tự động. Bạn có thể bôi đen bảng và copy thủ công."));
+    }
+
+    function exportAssignmentCSV() {
+      if (!currentAssignments.length) {
+        alert("Chưa có lịch để xuất.");
+        return;
+      }
+
+      const rows = [["Ngày", "Buổi", "Công việc", "Học sinh phụ trách"]];
+      currentAssignments.forEach(item => rows.push([item.day, item.session, item.task, item.students.join(", ")]));
+
+      if (currentExcludedStudents.length) {
+        rows.push([]);
+        rows.push(["Học sinh vắng / không phân công", "", "", currentExcludedStudents.join(", ")]);
+      }
+
+      rows.push([]);
+      rows.push(["Thống kê chi tiết theo học sinh", "", "", ""]);
+
+      const studentDetails = {};
+      currentAssignments.forEach(item => {
+        item.students.forEach(student => {
+          if (!studentDetails[student]) studentDetails[student] = [];
+          studentDetails[student].push(`${item.task} - ${item.session} - ${item.day}`);
+        });
+      });
+
+      Object.entries(studentDetails).forEach(([student, details]) => {
+        rows.push([student, "", "", details.join(" | ")]);
+      });
+
+      const csv = rows
+        .map(row => row.map(cell => `"${String(cell).replaceAll('"', '""')}"`).join(","))
+        .join("\n");
+
+      const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "lich-phan-cong.csv";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // ======================= ĐỌC FILE =======================
+    async function handleLearningFileUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      const status = document.getElementById("aiStatus");
+      status.style.color = "#2563eb";
+      status.textContent = `Đang đọc file: ${file.name}...`;
+
+      try {
+        const text = await extractTextFromFile(file);
+        uploadedLearningText = text.trim();
+        document.getElementById("fileText").value = uploadedLearningText;
+        status.style.color = "#16a34a";
+        status.textContent = `Đã đọc xong file. Độ dài nội dung: ${uploadedLearningText.length.toLocaleString("vi-VN")} ký tự.`;
+      } catch (error) {
+        console.error(error);
+        status.style.color = "#dc2626";
+        status.textContent = "Không đọc được file này. Bạn hãy thử đổi sang PDF/DOCX rõ chữ hoặc copy nội dung dán trực tiếp vào ô nội dung.";
+      }
+    }
+
+    async function extractTextFromFile(file) {
+      const name = file.name.toLowerCase();
+
+      if (name.endsWith(".txt")) {
+        return await file.text();
+      }
+
+      if (name.endsWith(".docx")) {
+        if (!window.mammoth) throw new Error("Chưa tải được thư viện đọc DOCX.");
+        const arrayBuffer = await file.arrayBuffer();
+        const result = await mammoth.extractRawText({ arrayBuffer });
+        return result.value || "";
+      }
+
+      if (name.endsWith(".pdf")) {
+        if (!window.pdfjsLib) throw new Error("Chưa tải được thư viện đọc PDF.");
+        const arrayBuffer = await file.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        const maxPages = Math.min(pdf.numPages, 80);
+        let text = "";
+
+        for (let pageNum = 1; pageNum <= maxPages; pageNum++) {
+          const page = await pdf.getPage(pageNum);
+          const content = await page.getTextContent();
+          const pageText = content.items.map(item => item.str).join(" ");
+          text += `\n\n[Trang ${pageNum}]\n${pageText}`;
+        }
+
+        if (pdf.numPages > maxPages) {
+          text += `\n\n[Lưu ý: App chỉ đọc ${maxPages} trang đầu để tránh quá tải trình duyệt.]`;
+        }
+
+        return text;
+      }
+
+      throw new Error("Định dạng chưa hỗ trợ.");
+    }
+
+    // ======================= GEMINI CHUNG =======================
+    function getGeminiApiKey() {
+      const activeKeyInput = document.querySelector(".panel.active .gemini-api-key");
+      const allKeyInputs = Array.from(document.querySelectorAll(".gemini-api-key"));
+      const activeKey = activeKeyInput ? activeKeyInput.value.trim() : "";
+      const savedKey = localStorage.getItem("lopHocVuiGeminiApiKey") || "";
+      const anyKey = allKeyInputs.map(input => input.value.trim()).find(Boolean) || "";
+      const key = activeKey || anyKey || savedKey;
+
+      if (key) {
+        allKeyInputs.forEach(input => {
+          if (!input.value) input.value = key;
+        });
+      }
+
+      return key;
+    }
+
+    function syncGeminiKeys(sourceInput) {
+      const key = sourceInput.value.trim();
+      document.querySelectorAll(".gemini-api-key").forEach(input => {
+        if (input !== sourceInput) input.value = sourceInput.value;
+      });
+
+      if (key) {
+        localStorage.setItem("lopHocVuiGeminiApiKey", key);
+      } else {
+        localStorage.removeItem("lopHocVuiGeminiApiKey");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedKey = localStorage.getItem("lopHocVuiGeminiApiKey") || "";
+      if (savedKey) {
+        document.querySelectorAll(".gemini-api-key").forEach(input => input.value = savedKey);
+      }
+    });
+
+    async function callGeminiJson(prompt, statusEl) {
+      const apiKey = getGeminiApiKey();
+      const model = document.getElementById("geminiModel")?.value || "gemini-2.5-flash";
+
+      if (!apiKey) {
+        throw new Error("Bạn cần nhập Gemini API key trước.");
+      }
+
+      const doFetch = () => fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ role: "user", parts: [{ text: prompt }] }],
+          generationConfig: { temperature: 0.2, responseMimeType: "application/json" }
+        })
+      });
+
+      const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+      for (let attempt = 0; attempt <= 2; attempt++) {
+        const response = await doFetch();
+        const data = await response.json();
+
+        if (!response.ok) {
+          const msg = data.error?.message || "Không gọi được Gemini API.";
+          const match = msg.match(/retry in ([\d.]+)s/i);
+          if (match && attempt < 2) {
+            let waitSec = Math.ceil(parseFloat(match[1])) + 1;
+            for (let i = waitSec; i > 0; i--) {
+              if (statusEl) statusEl.textContent = `⏳ Vượt giới hạn tốc độ, thử lại sau ${i}s...`;
+              await sleep(1000);
+            }
+            continue;
+          }
+          throw new Error(msg);
+        }
+
+        const rawText = data.candidates?.[0]?.content?.parts?.map(part => part.text || "").join("\n") || "";
+        return rawText;
+      }
+    }
+
+    function cleanJsonFence(rawText, openChar, closeChar) {
+      let text = String(rawText || "").trim();
+      text = text.replace(/^```json/i, "").replace(/^```/i, "").replace(/```$/i, "").trim();
+
+      const first = text.indexOf(openChar);
+      const last = text.lastIndexOf(closeChar);
+
+      if (first >= 0 && last > first) {
+        text = text.slice(first, last + 1);
+      }
+
+      return text;
+    }
+
+    // ======================= QUIZ =======================
+    function buildGeminiPrompt(sourceText, mcqCount, tfCount, difficulty) {
+      return `
+Bạn là giáo viên THCS, hãy dựa hoàn toàn vào nội dung tài liệu bên dưới để tạo câu hỏi ôn tập.
+
+Yêu cầu:
+- Tạo ${mcqCount} câu hỏi trắc nghiệm nhiều lựa chọn A/B/C/D.
+- Tạo ${tfCount} câu hỏi Đúng/Sai.
+- Mức độ: ${difficulty}.
+- Câu hỏi phải rõ ràng, phù hợp học sinh trung học cơ sở.
+- Mỗi câu trắc nghiệm có đúng 4 phương án.
+- Chỉ có 1 đáp án đúng.
+- Không tạo câu hỏi ngoài nội dung tài liệu.
+- Không giải thích dài dòng.
+
+BẮT BUỘC chỉ trả về JSON hợp lệ, không thêm markdown, không thêm giải thích.
+Định dạng JSON:
+[
+  {
+    "type": "MCQ",
+    "question": "Nội dung câu hỏi",
+    "options": ["Đáp án A", "Đáp án B", "Đáp án C", "Đáp án D"],
+    "answerIndex": 0
+  },
+  {
+    "type": "TF",
+    "question": "Nội dung câu khẳng định",
+    "options": ["Đúng", "Sai"],
+    "answerIndex": 0
+  }
+]
+
+Quy ước answerIndex:
+- Với MCQ: 0 = A, 1 = B, 2 = C, 3 = D.
+- Với TF: 0 = Đúng, 1 = Sai.
+
+NỘI DUNG TÀI LIỆU:
+${sourceText.slice(0, 45000)}
+`;
+    }
+
+    function parseGeminiQuestionJson(rawText) {
+      const text = cleanJsonFence(rawText, "[", "]");
+      let parsed = JSON.parse(text);
+
+      if (!Array.isArray(parsed) && Array.isArray(parsed.questions)) {
+        parsed = parsed.questions;
+      }
+
+      if (!Array.isArray(parsed)) {
+        throw new Error("Gemini chưa trả về danh sách câu hỏi dạng JSON array.");
+      }
+
+      return parsed.map(item => {
+        const type = String(item.type || "").toUpperCase() === "TF" ? "TF" : "MCQ";
+        const question = String(item.question || "").trim();
+        let options = Array.isArray(item.options) ? item.options.map(x => String(x).trim()) : [];
+        let answerIndex = Number(item.answerIndex);
+
+        if (type === "TF") {
+          options = ["Đúng", "Sai"];
+          if (String(item.answer || "").toLowerCase().includes("sai")) answerIndex = 1;
+          if (![0, 1].includes(answerIndex)) answerIndex = 0;
+          return { type, question, options, answerIndex, answerText: answerIndex === 0 ? "Đúng" : "Sai" };
+        }
+
+        if (options.length !== 4) {
+          throw new Error("Một câu trắc nghiệm không có đủ 4 đáp án.");
+        }
+
+        if (![0, 1, 2, 3].includes(answerIndex)) {
+          const answerLetter = String(item.answer || "").toUpperCase().trim();
+          answerIndex = ["A", "B", "C", "D"].indexOf(answerLetter);
+        }
+
+        if (![0, 1, 2, 3].includes(answerIndex)) {
+          throw new Error("Một câu trắc nghiệm chưa có answerIndex hợp lệ.");
+        }
+
+        return { type, question, options, answerIndex, answerText: ["A", "B", "C", "D"][answerIndex] };
+      }).filter(q => q.question && q.options.length);
+    }
+
+    async function generateQuizWithGemini() {
+      const mcqCount = Math.max(0, Number(document.getElementById("mcqCount").value || 0));
+      const tfCount = Math.max(0, Number(document.getElementById("tfCount").value || 0));
+      const difficulty = document.getElementById("difficultyLevel").value;
+      const sourceText = document.getElementById("fileText").value.trim();
+      const status = document.getElementById("aiStatus");
+      hideQuestionListAfterAiClick();
+
+      if (!sourceText) {
+        alert("Bạn cần upload file hoặc dán nội dung bài học vào ô nội dung tài liệu.");
+        return;
+      }
+
+      if (mcqCount + tfCount === 0) {
+        alert("Bạn cần chọn ít nhất 1 câu hỏi.");
+        return;
+      }
+
+      status.style.color = "#2563eb";
+      status.textContent = "Đang gọi Gemini để tạo câu hỏi...";
+
+      try {
+        const prompt = buildGeminiPrompt(sourceText, mcqCount, tfCount, difficulty);
+        const rawText = await callGeminiJson(prompt, status);
+        const questions = parseGeminiQuestionJson(rawText);
+
+        if (!questions.length) {
+          throw new Error("Gemini chưa tạo được câu hỏi hợp lệ.");
+        }
+
+        currentQuestions = questions;
+        gameIndex = 0;
+        gameScore = 0;
+        renderQuestionList(false);
+        hideQuestionListAfterAiClick();
+        updateQuizMetrics();
+
+        document.getElementById("gameArea").innerHTML =
+          '<div style="text-align:center;color:#16a34a;padding:42px 10px;font-weight:800;">Đã tạo câu hỏi bằng Gemini. Bạn có thể kiểm tra đáp án hoặc bấm “Bắt đầu chơi”.</div>';
+
+        status.style.color = "#16a34a";
+        status.textContent = `Đã tạo thành công ${questions.length} câu hỏi.`;
+      } catch (error) {
+        console.error(error);
+        status.style.color = "#dc2626";
+        status.textContent = `Lỗi: ${error.message}. Nếu bị chặn khi chạy trên trình duyệt, hãy chuyển sang bản có backend/serverless.`;
+      }
+    }
+
+    function setQuestionListVisible(isVisible) {
+      const section = document.getElementById("questionListSection");
+      if (!section) return;
+      section.classList.toggle("hidden", !isVisible);
+    }
+
+    function hideQuestionListAfterAiClick() {
+      setQuestionListVisible(false);
+    }
+
+    function parseQuiz() {
+      setQuestionListVisible(true);
+      const input = document.getElementById("quizInput").value.trim();
+      const lines = input.split("\n").map(x => x.trim()).filter(Boolean);
+      const questions = [];
+
+      lines.forEach(line => {
+        const parts = line.split("|").map(x => x.trim());
+        const type = (parts[0] || "").toUpperCase();
+
+        if (type === "MCQ" && parts.length >= 7) {
+          const answerLetter = parts[6].toUpperCase();
+          const answerIndex = ["A", "B", "C", "D"].indexOf(answerLetter);
+
+          if (answerIndex >= 0) {
+            questions.push({
+              type: "MCQ",
+              question: parts[1],
+              options: [parts[2], parts[3], parts[4], parts[5]],
+              answerIndex,
+              answerText: ["A", "B", "C", "D"][answerIndex]
+            });
+          }
+        }
+
+        if (type === "TF" && parts.length >= 3) {
+          const ans = parts[2].toLowerCase();
+          const answerIndex = ans.includes("đúng") || ans.includes("dung") || ans === "true" ? 0 : 1;
+          questions.push({
+            type: "TF",
+            question: parts[1],
+            options: ["Đúng", "Sai"],
+            answerIndex,
+            answerText: answerIndex === 0 ? "Đúng" : "Sai"
+          });
+        }
+      });
+
+      currentQuestions = questions;
+      gameIndex = 0;
+      gameScore = 0;
+      renderQuestionList(false);
+      updateQuizMetrics();
+
+      document.getElementById("gameArea").innerHTML =
+        '<div style="text-align:center;color:#667085;padding:42px 10px;">Đã tạo bộ câu hỏi. Bấm “Bắt đầu chơi” để ôn tập.</div>';
+    }
+
+    function renderQuestionList(showAnswers) {
+      const list = document.getElementById("questionList");
+
+      if (!currentQuestions.length) {
+        list.innerHTML = '<p class="note">Chưa có câu hỏi.</p>';
+        return;
+      }
+
+      list.innerHTML = currentQuestions.map((q, i) => `
+        <div class="question-card">
+          <div class="question-title">Câu ${i + 1}. ${escapeHtml(q.question)}</div>
+          ${q.options.map((opt, idx) => {
+            const prefix = q.type === "MCQ" ? `${["A", "B", "C", "D"][idx]}. ` : "";
+            const cls = showAnswers && idx === q.answerIndex ? "option correct" : "option";
+            return `<div class="${cls}">${escapeHtml(prefix + opt)}</div>`;
+          }).join("")}
+        </div>
+      `).join("");
+    }
+
+    function showTeacherAnswers() {
+      setQuestionListVisible(true);
+      renderQuestionList(true);
+    }
+
+    function startGame() {
+      if (!currentQuestions.length) {
+        parseQuiz();
+      }
+
+      if (!currentQuestions.length) {
+        alert("Bạn cần nhập câu hỏi đúng mẫu trước.");
+        return;
+      }
+
+      gameIndex = 0;
+      gameScore = 0;
+      answered = false;
+      renderGameQuestion();
+      updateQuizMetrics();
+    }
+
+    function renderGameQuestion() {
+      const area = document.getElementById("gameArea");
+      const q = currentQuestions[gameIndex];
+      answered = false;
+
+      area.innerHTML = `
+        <div class="tag">Câu ${gameIndex + 1} / ${currentQuestions.length}</div>
+        <div class="tag task-pill">${q.type === "MCQ" ? "Nhiều lựa chọn" : "Đúng / Sai"}</div>
+        <div class="big-question">${escapeHtml(q.question)}</div>
+        <div>
+          ${q.options.map((opt, idx) => {
+            const prefix = q.type === "MCQ" ? `${["A", "B", "C", "D"][idx]}. ` : "";
+            return `<button class="game-option" onclick="chooseAnswer(${idx})">${escapeHtml(prefix + opt)}</button>`;
+          }).join("")}
+        </div>
+        <div id="feedback" style="margin-top:12px;font-weight:800;"></div>
+        <div class="btn-row">
+          <button class="secondary hidden" id="nextBtn" onclick="nextQuestion()">Câu tiếp theo</button>
+        </div>
+      `;
+
+      updateQuizMetrics();
+    }
+
+    function chooseAnswer(index) {
+      if (answered) return;
+      answered = true;
+
+      const q = currentQuestions[gameIndex];
+      const buttons = document.querySelectorAll(".game-option");
+      const feedback = document.getElementById("feedback");
+
+      buttons.forEach((btn, idx) => {
+        if (idx === q.answerIndex) btn.classList.add("show-answer");
+        if (idx === index && idx === q.answerIndex) btn.classList.add("selected-correct");
+        if (idx === index && idx !== q.answerIndex) btn.classList.add("selected-wrong");
+      });
+
+      if (index === q.answerIndex) {
+        gameScore += 10;
+        feedback.style.color = "#16a34a";
+        feedback.textContent = "Chính xác! +10 điểm";
+      } else {
+        feedback.style.color = "#dc2626";
+        feedback.textContent = `Chưa đúng. Đáp án đúng là: ${q.type === "MCQ" ? ["A", "B", "C", "D"][q.answerIndex] : q.answerText}`;
+      }
+
+      document.getElementById("nextBtn").classList.remove("hidden");
+      updateQuizMetrics();
+    }
+
+    function nextQuestion() {
+      if (gameIndex < currentQuestions.length - 1) {
+        gameIndex++;
+        renderGameQuestion();
+      } else {
+        document.getElementById("gameArea").innerHTML = `
+          <div style="text-align:center;padding:36px 10px;">
+            <div style="font-size:34px;font-weight:900;color:#2563eb;">Hoàn thành!</div>
+            <p style="font-size:20px;font-weight:800;">Điểm của em: ${gameScore} / ${currentQuestions.length * 10}</p>
+            <button class="primary" onclick="startGame()">Chơi lại</button>
+          </div>
+        `;
+      }
+
+      updateQuizMetrics();
+    }
+
+    function updateQuizMetrics() {
+      document.getElementById("quizCount").textContent = currentQuestions.length;
+      document.getElementById("quizScore").textContent = gameScore;
+      document.getElementById("quizCurrent").textContent = currentQuestions.length ? gameIndex + 1 : 0;
+
+      const q = currentQuestions[gameIndex];
+      document.getElementById("quizMode").textContent = q ? (q.type === "MCQ" ? "MCQ" : "Đ/S") : "-";
+    }
+
+    function loadDemoQuiz() {
+      document.getElementById("fileText").value =
+        "Bài học Tin học 6: Thiết bị vào và thiết bị ra. Thiết bị vào là thiết bị dùng để nhập dữ liệu vào máy tính, ví dụ bàn phím, chuột, micro, máy quét. Thiết bị ra là thiết bị dùng để đưa thông tin từ máy tính ra bên ngoài, ví dụ màn hình, máy in, loa. Internet là mạng máy tính toàn cầu, giúp con người tìm kiếm, trao đổi và chia sẻ thông tin. Khi sử dụng Internet, học sinh cần biết chọn lọc thông tin, không chia sẻ dữ liệu cá nhân và tuân thủ quy tắc ứng xử văn minh trên môi trường số.";
+      document.getElementById("visualSourceText").value = document.getElementById("fileText").value;
+      document.getElementById("visualLessonTitle").value = "Thiết bị vào, thiết bị ra và Internet";
+      document.getElementById("quizInput").value =
+        "MCQ|Thiết bị nào dùng để nhập dữ liệu vào máy tính?|Màn hình|Máy in|Bàn phím|Loa|C\nMCQ|Đâu là phần mềm trình chiếu?|Microsoft Word|Microsoft PowerPoint|Paint|Notepad|B\nTF|Internet là mạng máy tính toàn cầu.|Đúng\nTF|Máy in là thiết bị nhập dữ liệu.|Sai";
+    }
+
+    function resetQuiz() {
+      uploadedLearningText = "";
+      currentQuestions = [];
+      gameIndex = 0;
+      gameScore = 0;
+
+      document.getElementById("questionList").innerHTML = "";
+      setQuestionListVisible(false);
+      document.getElementById("fileText").value = "";
+      document.getElementById("aiStatus").textContent = "";
+      document.getElementById("gameArea").innerHTML =
+        '<div style="text-align:center;color:#667085;padding:42px 10px;">Chưa có trò chơi. Hãy tạo bộ câu hỏi rồi bấm “Bắt đầu chơi”.</div>';
+
+      updateQuizMetrics();
+    }
+
+    loadDemoAssignment();
+  </script>
+</body>
+</html>
